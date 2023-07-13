@@ -35,24 +35,24 @@ const helpers = {
 
     if (title && performer) {
       return {
-        text: "SELECT * FROM songs WHERE LOWER(title) like $1 AND LOWER(performer) like $2",
+        text: "SELECT id, title, performer FROM songs WHERE LOWER(title) like $1 AND LOWER(performer) like $2",
         values: [likeQuery(title), likeQuery(performer)],
       };
     }
     if (title) {
       return {
-        text: "SELECT * FROM songs WHERE LOWER(title) like $1",
+        text: "SELECT id, title, performer FROM songs WHERE LOWER(title) like $1",
         values: [likeQuery(title)],
       };
     }
     if (performer) {
       return {
-        text: "SELECT * FROM songs WHERE LOWER(performer) like $1",
+        text: "SELECT id, title, performer FROM songs WHERE LOWER(performer) like $1",
         values: [likeQuery(performer)],
       };
     }
     return {
-      text: "SELECT * FROM songs",
+      text: "SELECT id, title, performer FROM songs",
     };
   },
   responsePlaylistSongActivitiesByIdPlaylist: ({
@@ -75,6 +75,9 @@ const helpers = {
     }));
     const result = { playlistId: id, activities: [...responseActivities] };
     return result;
+  },
+  getCurrentYear: () => {
+    return new Date().getFullYear();
   },
 };
 

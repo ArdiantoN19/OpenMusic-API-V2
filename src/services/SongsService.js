@@ -26,7 +26,7 @@ class SongsService {
   async getSongs({ title, performer }) {
     const query = helpers.responseSongByQueryParams({ title, performer });
     const result = await this._pool.query(query);
-    return result.rows.map(helpers.responseSongs);
+    return result.rows;
   }
 
   async getDetailSongById(id) {
@@ -36,7 +36,7 @@ class SongsService {
     };
 
     const result = await this._pool.query(query);
-    if (!result.rows.length) throw new NotFoundError("Song tidak ditemukan");
+    if (!result.rowCount) throw new NotFoundError("Song tidak ditemukan");
     return helpers.responseSongDetail(result.rows[0]);
   }
 
@@ -61,7 +61,7 @@ class SongsService {
     };
 
     const result = await this._pool.query(query);
-    if (!result.rows.length) {
+    if (!result.rowCount) {
       throw new NotFoundError("Gagal mengubah song, Id tidak ditemukan");
     }
   }
@@ -73,7 +73,7 @@ class SongsService {
     };
 
     const result = await this._pool.query(query);
-    if (!result.rows.length) {
+    if (!result.rowCount) {
       throw new NotFoundError("Gagal menghapus song, Id tidak ditemukan");
     }
   }

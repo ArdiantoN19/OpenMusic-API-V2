@@ -1,8 +1,4 @@
-/* eslint-disable camelcase */
-
 const { PgLiteral } = require("node-pg-migrate");
-
-// exports.shorthands = undefined;
 
 exports.up = (pgm) => {
   pgm.createTable("playlists", {
