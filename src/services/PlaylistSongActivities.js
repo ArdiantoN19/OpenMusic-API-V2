@@ -18,7 +18,7 @@ class PlaylistSongActivitiesService {
 
   async getPlaylistSongActivitiesById(id) {
     const query = {
-      text: "SELECT psa.* FROM playlist_song_activities psa LEFT JOIN playlists p ON psa.playlist_id = p.id WHERE p.id = $1",
+      text: "SELECT psa.* FROM playlist_song_activities psa LEFT JOIN playlists p ON psa.playlist_id = p.id WHERE psa.playlist_id = $1",
       values: [id],
     };
 
